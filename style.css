@@ -1173,19 +1173,26 @@ form textarea {
 
 }
 
+body.menu-open {
+    overflow: hidden;
+}
+
 .sidebar-backdrop {
     position: fixed;
     inset: 0;
     z-index: 20;
-    background: rgba(4,6,10,.5);
-    backdrop-filter: blur(6px);
+    background: rgba(4, 6, 10, .52);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity .2s ease;
+    transition: opacity .2s ease, visibility .2s ease;
 }
 
 .sidebar-backdrop.visible {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
 }
 
@@ -1201,6 +1208,25 @@ form textarea {
     line-height: 1;
 }
 
+.sidebar-close {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 22px;
+    line-height: 1;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
 .topbar-title-wrap {
     display: flex;
     align-items: center;
@@ -1210,24 +1236,24 @@ form textarea {
 @media(max-width:750px) {
 
     .sidebar {
-        width: min(300px, calc(100vw - 32px));
-        height: auto;
-        max-height: calc(100vh - 32px);
-        left: 16px;
-        top: 16px;
-        bottom: auto;
-        padding: 20px 10px;
-        border-radius: 18px;
-        transform: translateY(-16px) scale(.98);
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: min(290px, 82vw);
+        padding: 18px 12px 14px;
+        border-right: 1px solid var(--border);
+        background: rgba(10,11,15,.98);
+        transform: translateX(-105%);
         opacity: 0;
         pointer-events: none;
-        transition: transform .2s ease, opacity .2s ease;
+        transition: transform .22s ease, opacity .22s ease;
         box-shadow: 0 24px 80px rgba(0,0,0,.45);
-        border: 1px solid var(--border);
+        z-index: 30;
     }
 
     .sidebar.open {
-        transform: translateY(0) scale(1);
+        transform: translateX(0);
         opacity: 1;
         pointer-events: auto;
     }
@@ -1236,6 +1262,7 @@ form textarea {
         justify-content: flex-start;
         padding-left: 8px;
         padding-right: 8px;
+        flex: 1;
     }
 
     .brand > div:last-child,
