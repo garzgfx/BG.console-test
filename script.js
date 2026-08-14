@@ -290,6 +290,11 @@ const sidebarToggle =
         "sidebar-toggle"
     );
 
+const sidebarClose =
+    document.getElementById(
+        "sidebar-close"
+    );
+
 function setSidebarOpen(isOpen) {
 
     if (!sidebar || !sidebarBackdrop) return;
@@ -304,6 +309,11 @@ function setSidebarOpen(isOpen) {
         isOpen
     );
 
+    document.body.classList.toggle(
+        "menu-open",
+        isOpen
+    );
+
 }
 
 sidebarToggle?.addEventListener(
@@ -313,9 +323,23 @@ sidebarToggle?.addEventListener(
     )
 );
 
+sidebarClose?.addEventListener(
+    "click",
+    () => setSidebarOpen(false)
+);
+
 sidebarBackdrop?.addEventListener(
     "click",
     () => setSidebarOpen(false)
+);
+
+document.addEventListener(
+    "keydown",
+    event => {
+        if (event.key === "Escape") {
+            setSidebarOpen(false);
+        }
+    }
 );
 
 navItems.forEach(button => {
